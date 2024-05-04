@@ -8,7 +8,13 @@ It's Code is in `pointer-to-ref` sub directory.
 The most challenging part is to build it. You can copy whole `pointer-to-ref` dir
 to `clang-tools-extra` in llvm-project, append `add_subdirectory(pointer-to-ref)` tot `clang-tools-extra/CMakeLists.txt` and you are done.
 
-Another possilbe is to install clang libraries directly to you system.
+Another possible is to install clang libraries directly to you system.
+
+## Generate compile_commands.json
+
+```bash
+CMAKE_EXPORT_COMPILE_COMMANDS=ON cmake .
+```
 
 ## Usage
 
