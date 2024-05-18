@@ -2,4 +2,4 @@
 
 This is code snippets for [the presentation](https://github.com/feldsherov/pets-cattle-and-code).
 
-One dir is one example. Every example have it own readme.
+One directory is one example. Every directory has readme.

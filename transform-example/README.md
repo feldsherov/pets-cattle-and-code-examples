@@ -2,13 +2,14 @@
 
 ## Get pointer-to-ref-tool
 
-Pointer to ref is custom clang tool implemented by me.
-It's Code is in `pointer-to-ref` sub directory.
+Pointer to ref is custom clang tool.
+Code of it is in `pointer-to-ref` sub directory.
 
 The most challenging part is to build it. You can copy whole `pointer-to-ref` dir
-to `clang-tools-extra` in llvm-project, append `add_subdirectory(pointer-to-ref)` tot `clang-tools-extra/CMakeLists.txt` and you are done.
+to `clang-tools-extra` in llvm-project, append `add_subdirectory(pointer-to-ref)` tot `clang-tools-extra/CMakeLists.txt` and you are ready to build.
 
-Another possible is to install clang libraries directly to you system.
+[Here is blog post about building tool from cratch](https://www.freecodecamp.org/news/clang-ast-based-static-analysis-tools/).
+[Here is official doc for building clang.](https://clang.llvm.org/get_started.html)
 
 ## Generate compile_commands.json
 

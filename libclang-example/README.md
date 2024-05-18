@@ -9,7 +9,7 @@
 ```bash
 CMAKE_EXPORT_COMPILE_COMMANDS=ON cmake .
 ```
-_
+
 ## Run it and enjoy
 
 ```bash
