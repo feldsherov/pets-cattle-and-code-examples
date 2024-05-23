@@ -17,12 +17,13 @@ def find_string_literal(cursor: Cursor):
 def find_all_spans(cursor: Cursor, result: list[tuple[str, str]]):
     if cursor.kind == CursorKind.VAR_DECL:
 
-      type_decl = cursor.type.get_declaration()
-      if type_decl.displayname != "Span":
-          return
-      result.append(
-          (cursor.displayname, find_string_literal(cursor))
-        )
+        type_decl = cursor.type.get_declaration()
+        if type_decl.displayname != "Span":
+            return
+
+        var_name = cursor.displayname
+        message = find_string_literal(cursor)
+        result.append((var_name, message))
 
     for c in cursor.get_children():
         find_all_spans(c, result)
