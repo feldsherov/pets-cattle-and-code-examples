@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import sys
 import dataclasses
 
 from clang.cindex import Index, Cursor, CursorKind, CompilationDatabase, SourceRange
@@ -65,7 +66,7 @@ def output_result(spans: list[SpanDescription]):
 def main():
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--file", nargs="+", help="Source file to process.")
+    parser.add_argument("-f", "--file", help="Source file to process.")
     parser.add_argument(
         "-p", default=".", help="Directory with compilation_commands.json."
     )
@@ -76,26 +77,26 @@ def main():
 
     result = list()
 
-    for source_file_path in args.file:
-        print("Processing file", source_file_path)
-        index = Index.create()
-        commands = compdb.getCompileCommands(source_file_path)
+    source_file_path = args.file
+    print("Processing file", source_file_path)
+    index = Index.create()
+    commands = compdb.getCompileCommands(source_file_path)
 
-        commands = [list(c.arguments) for c in commands]
+    commands = [list(c.arguments) for c in commands]
 
-        if len(commands) != 1:
-            print("Unexpected length of commands", commands)
-            continue
+    if len(commands) != 1:
+        print("Unexpected length of commands", commands)
+        sys.exit(1)
 
-        commands = commands[0][:-2]
-        print("Compile commands: ", commands)
+    commands = commands[0][:-2]
+    print("Compile commands: ", commands)
 
-        tu = index.parse(source_file_path, commands)
-        if not tu:
-            print("Fail to parse", source_file_path)
-            continue
+    tu = index.parse(source_file_path, commands)
+    if not tu:
+        print("Fail to parse", source_file_path)
+        sys.exit(1)
 
-        find_all_spans(tu.cursor, result)
+    find_all_spans(tu.cursor, result)
 
     output_result(result)
 
